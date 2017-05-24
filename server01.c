@@ -1,4 +1,4 @@
-//подключение заголовочных файлов
+//ГЇГ®Г¤ГЄГ«ГѕГ·ГҐГ­ГЁГҐ Г§Г ГЈГ®Г«Г®ГўГ®Г·Г­Г»Гµ ГґГ Г©Г«Г®Гў
 #include<stdio.h>
 #include<winsock2.h>
 #include<math.h>
@@ -37,11 +37,11 @@ int main()
         exit (2);
     }
 
-    listen (listener, 1); //режим прослушивания
+    listen (listener, 1); //Г°ГҐГ¦ГЁГ¬ ГЇГ°Г®Г±Г«ГіГёГЁГўГ Г­ГЁГї
 
     while( 1)
     {
-        sock = accept (listener, NULL, NULL); //создание нового сокета при разрешении подключения
+        sock = accept (listener, NULL, NULL); //Г±Г®Г§Г¤Г Г­ГЁГҐ Г­Г®ГўГ®ГЈГ® Г±Г®ГЄГҐГІГ  ГЇГ°ГЁ Г°Г Г§Г°ГҐГёГҐГ­ГЁГЁ ГЇГ®Г¤ГЄГ«ГѕГ·ГҐГ­ГЁГї
         if(sock < 0) {
             perror ("accept");
             exit (3);
@@ -49,13 +49,13 @@ int main()
 
         while (1){
 			printf ("\nWaiting for messages from the client\n");
-            bytes_read = recv (sock, buf, 1024, 0);//получает данные и сохраняет в буфер
+            bytes_read = recv (sock, buf, 1024, 0);//ГЇГ®Г«ГіГ·Г ГҐГІ Г¤Г Г­Г­Г»ГҐ ГЁ Г±Г®ГµГ°Г Г­ГїГҐГІ Гў ГЎГіГґГҐГ°
             if (bytes_read <= 0) break;
             printf ("Received %d bytes\tchislo: %s\n", bytes_read, buf);
             future_koren = atof(buf);
 
             if (future_koren < 0){
-               send (sock, oshibka, sizeof(oshibka), 0);//отправка данных, возвращает кол-во отправленных байт
+               send (sock, oshibka, sizeof(oshibka), 0);//Г®ГІГЇГ°Г ГўГЄГ  Г¤Г Г­Г­Г»Гµ, ГўГ®Г§ГўГ°Г Г№Г ГҐГІ ГЄГ®Г«-ГўГ® Г®ГІГЇГ°Г ГўГ«ГҐГ­Г­Г»Гµ ГЎГ Г©ГІ
                break;
             }
 
@@ -71,7 +71,7 @@ int main()
             send (sock, buf, bytes_read, 0);
         }
 
-        closesocket (sock); // закрытие сокета
+        closesocket (sock); // Г§Г ГЄГ°Г»ГІГЁГҐ Г±Г®ГЄГҐГІГ 
     }
 
     return 0;
