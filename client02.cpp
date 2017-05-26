@@ -59,23 +59,23 @@ int main ()
     addr.sin_port = htons (3425);
     addr.sin_addr.s_addr = inet_addr("192.168.1.1");//25.42.128.91
 
-    cout<<"\nÍàéòè èãðîêà?\n";
+    cout<<"\nÃÃ Ã©Ã²Ã¨ Ã¨Ã£Ã°Ã®ÃªÃ ?\n";
     system("pause");
 
-    if(connect (sock, (struct sockaddr *)&addr, sizeof (addr)) < 0) { //çàïðîñ íà ïîäêëþ÷åíèå
+    if(connect (sock, (struct sockaddr *)&addr, sizeof (addr)) < 0) { //Ã§Ã Ã¯Ã°Ã®Ã± Ã­Ã  Ã¯Ã®Ã¤ÃªÃ«Ã¾Ã·Ã¥Ã­Ã¨Ã¥
         perror ("connect");
         exit (2);
     }
 
 
-    cout<<"\nÈãðà íà÷àëàñü\n10-Îòäàòü ïåðâûé õîä ïðîòèâíèêó";
+    cout<<"\nÃˆÃ£Ã°Ã  Ã­Ã Ã·Ã Ã«Ã Ã±Ã¼\n10-ÃŽÃ²Ã¤Ã Ã²Ã¼ Ã¯Ã¥Ã°Ã¢Ã»Ã© ÃµÃ®Ã¤ Ã¯Ã°Ã®Ã²Ã¨Ã¢Ã­Ã¨ÃªÃ³";
     initgraph(&gdriver, &gmode, "");
     Fon();
 
 
     while(1){
-        if(koord !=10) cout<<"\nÂàø õîä\n";
-            else {cout<<"\nÂû óæå îòäàëè ïåðâûé õîä ïðîòèâíèêó!\n";}
+        if(koord !=10) cout<<"\nÃ‚Ã Ã¸ ÃµÃ®Ã¤\n";
+            else {cout<<"\nÃ‚Ã» Ã³Ã¦Ã¥ Ã®Ã²Ã¤Ã Ã«Ã¨ Ã¯Ã¥Ã°Ã¢Ã»Ã© ÃµÃ®Ã¤ Ã¯Ã°Ã®Ã²Ã¨Ã¢Ã­Ã¨ÃªÃ³!\n";}
 
         cin>>koord;
         if ((koord <1)||(koord>10)){
@@ -90,14 +90,14 @@ int main ()
         sprintf(buf, "%i", koord);
         send (sock, buf, sizeof (buf), 0);
 
-        if(koord==10) cout<<"\nÆäèòå õîäà ïðîòèâíèêà!\n";
+        if(koord==10) cout<<"\nÃ†Ã¤Ã¨Ã²Ã¥ ÃµÃ®Ã¤Ã  Ã¯Ã°Ã®Ã²Ã¨Ã¢Ã­Ã¨ÃªÃ !\n";
 
         bytes_read = recv (sock, buf, sizeof (buf), 0);
-        //printf ("Ïðèíÿòî%d áàéò\t÷èñëî: %s\n", bytes_read, buf);
+        //printf ("ÃÃ°Ã¨Ã­Ã¿Ã²Ã®%d Ã¡Ã Ã©Ã²\tÃ·Ã¨Ã±Ã«Ã®: %s\n", bytes_read, buf);
         koord=atof(buf);
 
         if (bytes_read==8){
-            cout<<"-Ïîëå çàíÿòî!\n";
+            cout<<"-ÃÃ®Ã«Ã¥ Ã§Ã Ã­Ã¿Ã²Ã®!\n";
             continue;
         }
 
@@ -105,7 +105,7 @@ int main ()
             bytes_read = recv (sock, buf, sizeof (buf), 0);
             koord=atof(buf);
             nolik(X[koord-1],Y[koord-1]);
-            cout<<"\nÂû âûèãðàëè!\n";
+            cout<<"\nÃ‚Ã» Ã¢Ã»Ã¨Ã£Ã°Ã Ã«Ã¨!\n";
             break;
         }
 
@@ -116,16 +116,16 @@ int main ()
         }
         else {
                 one_server=2;
-                nolik(X[koord-1],Y[koord-1]); //åñëè êëèåíò õîäèë ïåðâûì
+                nolik(X[koord-1],Y[koord-1]); //Ã¥Ã±Ã«Ã¨ ÃªÃ«Ã¨Ã¥Ã­Ã² ÃµÃ®Ã¤Ã¨Ã« Ã¯Ã¥Ã°Ã¢Ã»Ã¬
         }
 
-        printf ("\nÆäèòå õîäà ïðîòèâíèêà!\n");
+        printf ("\nÃ†Ã¤Ã¨Ã²Ã¥ ÃµÃ®Ã¤Ã  Ã¯Ã°Ã®Ã²Ã¨Ã¢Ã­Ã¨ÃªÃ !\n");
         bytes_read = recv (sock, buf, sizeof (buf), 0);
         if (bytes_read==16){
             recv (sock, buf, sizeof (buf), 0);
             koord=atof(buf);
             krestik(X[koord-1],Y[koord-1]);
-            cout<<"\nÂû ïðîèãðàëè!\n";
+            cout<<"\nÃ‚Ã» Ã¯Ã°Ã®Ã¨Ã£Ã°Ã Ã«Ã¨!\n";
             break;
         }
         koord=atof(buf);
