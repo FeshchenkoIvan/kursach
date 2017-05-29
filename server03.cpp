@@ -9,10 +9,10 @@
 
 using namespace std;
 
-char oshibka[] = "Ошибка!";
-char vinner[15] = "\nВы выиграли)\n";
-char lose[16] = "\nВы проиграли(\n";
-char losetime[33] = "\nПротивник проиграл по времени!\n";
+char oshibka[] = "ГЋГёГЁГЎГЄГ !";
+char vinner[15] = "\nГ‚Г» ГўГ»ГЁГЈГ°Г Г«ГЁ)\n";
+char lose[16] = "\nГ‚Г» ГЇГ°Г®ГЁГЈГ°Г Г«ГЁ(\n";
+char losetime[33] = "\nГЏГ°Г®ГІГЁГўГ­ГЁГЄ ГЇГ°Г®ГЁГЈГ°Г Г« ГЇГ® ГўГ°ГҐГ¬ГҐГ­ГЁ!\n";
 const int X[9]={110,320,530,110,320,530,110,320,530};
 const int Y[9]={400,400,400,240,240,240,80,80,80};
 int IGRA[9]={0,0,0,0,0,0,0,0,0};
@@ -85,7 +85,7 @@ int main()
     }
 
 
-    listen (listener, 1); //режим прослушивания
+    listen (listener, 1); //Г°ГҐГ¦ГЁГ¬ ГЇГ°Г®Г±Г«ГіГёГЁГўГ Г­ГЁГї
 
 
 
@@ -93,59 +93,59 @@ int main()
     {
         for(int i=0;i<9;i++)
             IGRA[i]=0;
-        cout<<"\nВведите время на ход(сек)=";
+        cout<<"\nГ‚ГўГҐГ¤ГЁГІГҐ ГўГ°ГҐГ¬Гї Г­Г  ГµГ®Г¤(Г±ГҐГЄ)=";
         cin>>tm;
-        cout<<"\nПоиск игрока\n";
+        cout<<"\nГЏГ®ГЁГ±ГЄ ГЁГЈГ°Г®ГЄГ \n";
         //tm_begin=clock();
-        sock = accept (listener, NULL, NULL); //создание нового сокета при разрешении подключения
+        sock = accept (listener, NULL, NULL); //Г±Г®Г§Г¤Г Г­ГЁГҐ Г­Г®ГўГ®ГЈГ® Г±Г®ГЄГҐГІГ  ГЇГ°ГЁ Г°Г Г§Г°ГҐГёГҐГ­ГЁГЁ ГЇГ®Г¤ГЄГ«ГѕГ·ГҐГ­ГЁГї
         if(sock < 0) {
             perror ("accept");
             exit (3);
         }
-        printf ("\nИгра началась\n");
+        printf ("\nГ€ГЈГ°Г  Г­Г Г·Г Г«Г Г±Гј\n");
         initgraph(&gdriver, &gmode, "server");
         Fon();
-        flag=1;//флаг для первого хода сервера
+        flag=1;//ГґГ«Г ГЈ Г¤Г«Гї ГЇГҐГ°ГўГ®ГЈГ® ГµГ®Г¤Г  Г±ГҐГ°ГўГҐГ°Г 
         sprintf(buf,"%i", tm);
         send (sock, buf, sizeof(buf), 0);
 
         while(1){
             tm_begin=clock();
-            bytes_read = recv (sock, buf,sizeof(buf), 0);//получает данные и сохраняет в буфер
+            bytes_read = recv (sock, buf,sizeof(buf), 0);//ГЇГ®Г«ГіГ·Г ГҐГІ Г¤Г Г­Г­Г»ГҐ ГЁ Г±Г®ГµГ°Г Г­ГїГҐГІ Гў ГЎГіГґГҐГ°
             tm_end=clock();
             if (bytes_read < 0){
-                cout<<"\nИгрок2 покинул игру\n";
+                cout<<"\nГ€ГЈГ°Г®ГЄ2 ГЇГ®ГЄГЁГ­ГіГ« ГЁГЈГ°Гі\n";
                 break;
             }
 
             koord = atof(buf);
-            if ((koord == 10)&&(flag==1)){ //если 10, то ходит первый сервер
+            if ((koord == 10)&&(flag==1)){ //ГҐГ±Г«ГЁ 10, ГІГ® ГµГ®Г¤ГЁГІ ГЇГҐГ°ГўГ»Г© Г±ГҐГ°ГўГҐГ°
                 if (((tm_end-tm_begin)/CLOCKS_PER_SEC)>tm){
-                    cout<<"\nВы выиграли,противник проиграл по времени\n";
+                    cout<<"\nГ‚Г» ГўГ»ГЁГЈГ°Г Г«ГЁ,ГЇГ°Г®ГІГЁГўГ­ГЁГЄ ГЇГ°Г®ГЁГЈГ°Г Г« ГЇГ® ГўГ°ГҐГ¬ГҐГ­ГЁ\n";
                     send (sock, lose, sizeof(lose), 0);
                     break;
                 }
                 flag=0;
-                printf ("\nВы ходите первый(крестики)\n");
-                cout<<"Ваш ход!\n";
+                printf ("\nГ‚Г» ГµГ®Г¤ГЁГІГҐ ГЇГҐГ°ГўГ»Г©(ГЄГ°ГҐГ±ГІГЁГЄГЁ)\n");
+                cout<<"Г‚Г Гё ГµГ®Г¤!\n";
                 tm_begin=clock();
                 while(1){
                     cin>>koord;
                     tm_end=clock();
                     if (((tm_end-tm_begin)/CLOCKS_PER_SEC)>tm){
-                        cout<<"\nВы проиграли по времени\n";
+                        cout<<"\nГ‚Г» ГЇГ°Г®ГЁГЈГ°Г Г«ГЁ ГЇГ® ГўГ°ГҐГ¬ГҐГ­ГЁ\n";
                         send (sock, losetime, sizeof(losetime), 0);
                         flag=3;
                         break;
                     }
                     if ((koord <1)||(koord>9)){
-                        cout<<"-Нет такого поля!\n";
+                        cout<<"-ГЌГҐГІ ГІГ ГЄГ®ГЈГ® ГЇГ®Г«Гї!\n";
                         continue;
                     }
                     IGRA[koord-1]=1;
                     krestik(X[koord-1],Y[koord-1]);
                     sprintf(buf, "%i", koord);
-                    cout<<"\nЖдите хода противника!\n";
+                    cout<<"\nГ†Г¤ГЁГІГҐ ГµГ®Г¤Г  ГЇГ°Г®ГІГЁГўГ­ГЁГЄГ !\n";
                     send (sock, buf, sizeof(buf), 0);
                     break;
                 }
@@ -153,9 +153,9 @@ int main()
                     break;
                 continue;
             }
-            else{ //ход клиента
+            else{ //ГµГ®Г¤ ГЄГ«ГЁГҐГ­ГІГ 
                 if (((tm_end-tm_begin)/CLOCKS_PER_SEC)>tm){
-                    cout<<"\nВы выиграли,противник проиграл по времени\n";
+                    cout<<"\nГ‚Г» ГўГ»ГЁГЈГ°Г Г«ГЁ,ГЇГ°Г®ГІГЁГўГ­ГЁГЄ ГЇГ°Г®ГЁГЈГ°Г Г« ГЇГ® ГўГ°ГҐГ¬ГҐГ­ГЁ\n";
                     send (sock, lose, sizeof(lose), 0);
                     break;
                 }
@@ -167,7 +167,7 @@ int main()
                     if (vin()==true){
                         cout<<lose;
                         send (sock, vinner, sizeof(vinner), 0);
-                        send (sock, buf, sizeof(buf), 0);// или какой нибудь koord?(10) или vin потом дорисовать круг?
+                        send (sock, buf, sizeof(buf), 0);// ГЁГ«ГЁ ГЄГ ГЄГ®Г© Г­ГЁГЎГіГ¤Гј koord?(10) ГЁГ«ГЁ vin ГЇГ®ГІГ®Г¬ Г¤Г®Г°ГЁГ±Г®ГўГ ГІГј ГЄГ°ГіГЈ?
                         break;
                     }
                     send (sock, buf, sizeof(buf), 0);
@@ -178,20 +178,20 @@ int main()
                 }
             }
 
-            cout<<"\nВаш ход!\n";
+            cout<<"\nГ‚Г Гё ГµГ®Г¤!\n";
             tm_begin=clock();
             while(1){
                         cin>>koord;
                         tm_end=clock();
                         if (((tm_end-tm_begin)/CLOCKS_PER_SEC)>tm){
-                            cout<<"\nВы проиграли по времени\n";
+                            cout<<"\nГ‚Г» ГЇГ°Г®ГЁГЈГ°Г Г«ГЁ ГЇГ® ГўГ°ГҐГ¬ГҐГ­ГЁ\n";
                             send (sock, vinner, sizeof(vinner), 0);
                             flag = 3;
                             break;
 
                         }
                         if ((koord <1)||(koord>9)){
-                            cout<<"-Нет такого поля!\n";
+                            cout<<"-ГЌГҐГІ ГІГ ГЄГ®ГЈГ® ГЇГ®Г«Гї!\n";
                             continue;
                         }
                         if (IGRA[koord-1]==0){
@@ -205,12 +205,12 @@ int main()
                                 flag = 3;
                                 break;
                             }
-                            cout<<"\nЖдите хода противника!\n";
+                            cout<<"\nГ†Г¤ГЁГІГҐ ГµГ®Г¤Г  ГЇГ°Г®ГІГЁГўГ­ГЁГЄГ !\n";
                             send (sock, buf, sizeof(buf), 0);
                             break;
                         }
                         else{
-                            cout<<"-Поле занято!\n";
+                            cout<<"-ГЏГ®Г«ГҐ Г§Г Г­ГїГІГ®!\n";
                             continue;
                         }
                     }
@@ -218,7 +218,7 @@ int main()
         }
         system("pause");
         closegraph();
-        closesocket (sock); // закрытие сокета
+        closesocket (sock); // Г§Г ГЄГ°Г»ГІГЁГҐ Г±Г®ГЄГҐГІГ 
         //cleardevice();
     }
 
